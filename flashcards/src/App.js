@@ -1,5 +1,6 @@
 
 import './App.css';
+import { useState } from 'react';
 
 export default function App() {
   return (
@@ -11,7 +12,7 @@ export default function App() {
 
 const questions = [
   {
-    id: 3456,
+    id: 4508,
     question: "Em que linguagem o React é baseado?",
     answer: "JavaScript",
   },
@@ -26,12 +27,12 @@ const questions = [
     answer: "JSX",
   },
   {
-    id: 3456,
+    id: 7890,
     question: "Como passar os dados do component pai para o componente filho?",
     answer: "Props",
   },
   {
-    id: 3456,
+    id: 9087,
     question: "Como 'dar' memória aos componentes?",
     answer: "hook useState",
   },
@@ -43,12 +44,22 @@ const questions = [
 
 ]
 
-function Flashcards(){
+function Flashcards() {
+  
+  const [selectedId, setSelectedId] = useState(null);
+
+  function handleclick(id){
+    setSelectedId(id !== selectedId ? id : null);
+
+  }
+
   return (
     <div className='flashcards'>
       {questions.map((question) => (
-        <div>
-          <p>{question.question}</p>
+        <div key={question.id} 
+        className={question.id === selectedId ? "selected" : ""}
+        onClick={() => handleclick(question.id)}>
+          <p>{question.id === selectedId ? question.answer : question.question}</p>
         </div>
       ))}
     </div>
